@@ -1,3 +1,3 @@
-const DESCRIPTION_ROW_ERROR: Error = new Error('Could not find description row.');
+const DESCRIPTION_CELL_ERROR: Error = new Error('Could not find description cell.');
 
-export default DESCRIPTION_ROW_ERROR;
+export default DESCRIPTION_CELL_ERROR;

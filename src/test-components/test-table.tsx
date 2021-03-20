@@ -1,38 +1,30 @@
-import Table, { TableProps } from '@awsui/components-react/table';
-import {
-  FunctionComponent,
-  MutableRefObject,
-  ReactElement,
-  useRef,
-} from 'react';
+import Table from '@awsui/components-react/table';
+import { MutableRefObject, ReactElement, useRef } from 'react';
 import useAwsuiTableItemDescription from '..';
 import TestAwsuiTableItemDescription from '../test-components/test-awsui-table-item-description';
+import ASYNC_EFFECT_REF from '../test-constants/async-effect-ref';
 import TEST_COLUMN_DEFINITIONS from '../test-constants/test-column-definitions';
-import TEST_ITEMS from '../test-constants/test-items';
-import TestItem from '../test-types/test-item';
-
-interface Props {
-  Component?: FunctionComponent<TestItem>;
-  onRowClick?: TableProps['onRowClick'];
-}
+import TestTableProps from '../test-types/test-table-props';
 
 export default function TestTable({
   Component = TestAwsuiTableItemDescription,
+  colSpan = 1,
+  items,
   onRowClick,
-}: Props): ReactElement {
+}: TestTableProps): ReactElement {
   const ref: MutableRefObject<HTMLElement | null> = useRef(null);
 
-  useAwsuiTableItemDescription({
+  ASYNC_EFFECT_REF.current = useAwsuiTableItemDescription({
     Component,
-    colSpan: 1,
-    items: TEST_ITEMS,
+    colSpan,
+    items,
     onRowClick,
     ref,
-  });
+  }).current;
 
   return (
     <span ref={ref}>
-      <Table columnDefinitions={TEST_COLUMN_DEFINITIONS} items={TEST_ITEMS} />
+      <Table columnDefinitions={TEST_COLUMN_DEFINITIONS} items={items} />
     </span>
   );
 }

@@ -16,6 +16,7 @@ export default {
     '!<rootDir>/src/**/test-constants/*.{ts,tsx}',
     '!<rootDir>/src/**/test-map/*.{ts,tsx}',
     '!<rootDir>/src/**/test-types/*.{ts,tsx}',
+    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
   ],
   coverageThreshold: {
     global: {

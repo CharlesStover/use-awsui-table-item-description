@@ -1,6 +1,6 @@
 {
   "name": "use-awsui-table-item-description",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Charles Stover <use-awsui-table-item-description@charlesstover.com>",
   "description": "Adds a description row to each AWS UI table item",
   "homepage": "https://www.npmjs.com/package/use-awsui-table-item-description",
