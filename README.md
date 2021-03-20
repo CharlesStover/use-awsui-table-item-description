@@ -21,7 +21,11 @@ a React component mounted with the `useAwsuiTableItemDescription` hook.
 ## Use
 
 ```javascript
+import Table from '@awsui/components-react/table';
+import { useRef } from 'react';
 import useAwsuiTableItemDescription from 'use-awsui-table-item-description';
+
+const COLUMN_DEFINITIONS = [ /* ... */ ];
 
 const ITEM = {
   description: 'This is my description.',
@@ -32,7 +36,7 @@ function TableItemDescription(item) {
 }
 
 function MyTable() {
-  const ref = useRef();
+  const ref = useRef(null);
   useAwsuiTableItemDescription({
     Component: TableItemDescription,
     colSpan: 4,
