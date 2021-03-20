@@ -3,11 +3,6 @@ node_js: 14
 branches:
   only: master
 install:
-  - rm -rf ./.yarn/cache/
-  - rm -rf ./.yarn/sdks/
-  - rm -rf ./.yarn/unplugged/
-  - rm -rf ./.yarn/build-state.yml
-  - rm -rf ./.yarn/install-state.gz
   - yarn
 script:
   - yarn build
@@ -20,3 +15,5 @@ deploy:
     branch: master
   provider: npm
   skip_cleanup: true
+  github-token:
+    secure: dWuh9WCvc9658ArZ1M7/9Opf7M6aaekSHMrbt6iSZ/b87REGXvHvkRN5widIF+YMeM9Kx9ii4n7HQi26P4AIA/+IzXy8Vspma3U0Mg9AzDfklFKOvKZdTAGgBvonl+J8boYEYgg6w8PlTU5gPNarTn7dCwlJc/vH1ltvvO0UXYDSuT0fxoKzjEYTGOb/o684SjZADOxKquTAhFEwP7pL9hy4bavHA2VXZIOvYhVZldL3JlftZtCkowZ6ayuzRSuxRMFcOaWY7IDlft/xYXhOSw4y0H7Opkh2AwygslG9Trvys38MjdpG54e79yY+O3UXhpHbWccqUdZ84AWiuxGpPPez9c4X9K8EFQvRVuXb9+0grHQfNAeeSglc8h58JFN46maTeOon1LvWbNxOLhU7kIq7qdwAi2xIUj+tGG+Qazh8862AUXETRmZp4byzzP2aCl0if8M0JlpPACfD1huJzDvr4j6H0cDuAq+YyGXOJYtdh2sfcPa2XxwlKKxy/1tGha149Dx2zz5h5tQcRLQuZaofTYPyGOy2ZpRh5tUDMesPIdPOa7igGaMbS/16OudMxdw3DUyc5GOWVMmWI/Qrw3XQTEexyTbkOUcABYijCKwl7uCEteJkQNEEwMMh+1VLRCWWreZAzgs1WbOnIJNBUjqzGM2DPEc0CBN0ZCaC7hM=

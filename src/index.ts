@@ -1,3 +1,4 @@
-export default function App(): void {
-  return;
-}
+export {
+  default,
+  UseAwsuiTableItemDescriptionProps,
+} from './hooks/use-awsui-table-item-description';

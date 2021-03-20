@@ -1,14 +1,22 @@
 export default {
   cacheDirectory: './jest/cache',
   collectCoverage: true,
+  coverageDirectory: './jest/coverage',
+  resetMocks: true,
+  resetModules: true,
+  restoreMocks: true,
+  roots: ['<rootDir>/src'],
+  transformIgnorePatterns: ['node_modules/(?!@awsui/components-react)/'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/src/**/*.d.ts',
     '!<rootDir>/src/**/*.stories.{ts,tsx}',
     '!<rootDir>/src/**/*.test.{ts,tsx}',
-    '!<rootDir>/src/**/test-utils/*.{ts,tsx}',
+    '!<rootDir>/src/**/test-components/*.{ts,tsx}',
+    '!<rootDir>/src/**/test-constants/*.{ts,tsx}',
+    '!<rootDir>/src/**/test-map/*.{ts,tsx}',
+    '!<rootDir>/src/**/test-types/*.{ts,tsx}',
   ],
-  coverageDirectory: './jest/coverage',
   coverageThreshold: {
     global: {
       branches: 100,
@@ -20,11 +28,8 @@ export default {
   moduleNameMapper: {
     '\\.(?:css|gif|jpg|png|scss)$': '<rootDir>/test-utils/empty.ts',
   },
-  resetMocks: true,
-  resetModules: true,
-  restoreMocks: true,
-  roots: ['<rootDir>/src'],
   transform: {
+    '.+\\.js$': 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
   },
 };
