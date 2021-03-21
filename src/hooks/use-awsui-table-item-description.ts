@@ -33,6 +33,12 @@ export default function useAwsuiTableItemDescription<Item>({
   > = useRef();
   const isMounted: MutableRefObject<boolean> = useRef(true);
 
+  useLayoutEffect((): VoidFunction => {
+    return (): void => {
+      isMounted.current = false;
+    };
+  }, []);
+
   useLayoutEffect((): void | VoidFunction => {
     const tbody: HTMLTableSectionElement | null = mapRefToTbody(ref);
     if (tbody === null) {
@@ -153,7 +159,6 @@ export default function useAwsuiTableItemDescription<Item>({
     })();
 
     return (): void => {
-      isMounted.current = false;
       for (const descriptionCell of descriptionCells) {
         unmountComponentAtNode(descriptionCell);
       }
