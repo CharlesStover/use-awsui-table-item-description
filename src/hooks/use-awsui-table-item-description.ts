@@ -109,11 +109,6 @@ export default function useAwsuiTableItemDescription<Item>({
           break;
         }
 
-        /*
-        Possible TODO: Use a mutable object reference to track unmount. If the
-          component already unmounted before this callback fired, bail.
-        */
-
         // If this component didn't render anything, don't append a row.
         if (descriptionCell.firstChild === null) {
           rowIndex++;
