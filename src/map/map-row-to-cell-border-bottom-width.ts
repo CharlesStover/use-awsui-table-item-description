@@ -1,10 +1,14 @@
+const INDEX_OFFSET = 1;
+
 export default function mapRowToCellBorderBottomWidth(
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   row: HTMLTableRowElement,
-): null | string {
-  const cells: HTMLCollectionOf<HTMLTableCellElement> = row.getElementsByTagName(
-    'td',
+): string | null {
+  const cells: HTMLCollectionOf<HTMLTableCellElement> =
+    row.getElementsByTagName('td');
+  const lastCell: HTMLTableCellElement | null = cells.item(
+    cells.length - INDEX_OFFSET,
   );
-  const lastCell: HTMLTableCellElement | null = cells.item(cells.length - 1);
   if (lastCell === null) {
     return null;
   }

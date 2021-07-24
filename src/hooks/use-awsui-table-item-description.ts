@@ -1,10 +1,7 @@
-import { TableProps } from '@awsui/components-react/table';
-import {
-  ComponentType,
-  MutableRefObject,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
+import type { TableProps } from '@awsui/components-react/table';
+import type { ComponentType, MutableRefObject } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { unmountComponentAtNode } from 'react-dom';
 import mapRefToTbody from '../map/map-ref-to-tbody';
 import mapRowToCellClassName from '../map/map-row-to-cell-class-name';
@@ -12,14 +9,20 @@ import mapRowsToCellBorderBottomWidth from '../map/map-rows-to-cell-border-botto
 import promisifiedRender from '../utils/promisified-render';
 
 export interface UseAwsuiTableItemDescriptionProps<Item> {
-  Component: ComponentType<Item>;
-  colSpan: number;
-  items: Item[];
-  onRowClick?: TableProps['onRowClick'];
-  ref: MutableRefObject<HTMLElement | null>;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly Component: ComponentType<Item>;
+  readonly colSpan: number;
+  readonly items: readonly Item[];
+  readonly ref: Readonly<MutableRefObject<HTMLElement | null>>;
+  readonly onRowClick?: (
+    event: Readonly<
+      NonCancelableCustomEvent<Readonly<TableProps.OnRowClickDetail<Item>>>
+    >,
+  ) => void;
 }
 
 export default function useAwsuiTableItemDescription<Item>({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   Component,
   colSpan,
   onRowClick,
@@ -28,9 +31,8 @@ export default function useAwsuiTableItemDescription<Item>({
 }: UseAwsuiTableItemDescriptionProps<Item>): MutableRefObject<
   Promise<unknown> | undefined
 > {
-  const asyncEffectRef: MutableRefObject<
-    Promise<unknown> | undefined
-  > = useRef();
+  const asyncEffectRef: MutableRefObject<Promise<unknown> | undefined> =
+    useRef();
   const isMounted: MutableRefObject<boolean> = useRef(true);
 
   useLayoutEffect((): VoidFunction => {
@@ -39,19 +41,17 @@ export default function useAwsuiTableItemDescription<Item>({
     };
   }, []);
 
-  useLayoutEffect((): void | VoidFunction => {
+  useLayoutEffect((): VoidFunction | undefined => {
     const tbody: HTMLTableSectionElement | null = mapRefToTbody(ref);
     if (tbody === null) {
       return;
     }
 
-    const rows: HTMLCollectionOf<HTMLTableRowElement> = tbody.getElementsByTagName(
-      'tr',
-    );
+    const rows: HTMLCollectionOf<HTMLTableRowElement> =
+      tbody.getElementsByTagName('tr');
 
-    const cellBorderBottomWidth: null | string = mapRowsToCellBorderBottomWidth(
-      rows,
-    );
+    const cellBorderBottomWidth: string | null =
+      mapRowsToCellBorderBottomWidth(rows);
     if (cellBorderBottomWidth === null) {
       return;
     }
@@ -66,7 +66,7 @@ export default function useAwsuiTableItemDescription<Item>({
         (itemRow = rows.item(rowIndex));
         itemIndex++
       ) {
-        const cellClassName: null | string = mapRowToCellClassName(itemRow);
+        const cellClassName: string | null = mapRowToCellClassName(itemRow);
 
         // We ignore this line, because it should never happen, and it's
         //   impossible to reproduce with Jest. This is a fail safe in case AWS UI
@@ -78,9 +78,8 @@ export default function useAwsuiTableItemDescription<Item>({
 
         const item: Item = items[itemIndex];
 
-        const descriptionCell: HTMLTableCellElement = document.createElement(
-          'td',
-        );
+        const descriptionCell: HTMLTableCellElement =
+          document.createElement('td');
         descriptionCells.push(descriptionCell);
 
         const itemRowClassName: string = itemRow.className;
@@ -120,9 +119,8 @@ export default function useAwsuiTableItemDescription<Item>({
         descriptionCell.style.setProperty('border-top-width', '0');
         descriptionCell.style.setProperty('padding-top', '0');
 
-        const descriptionRow: HTMLTableRowElement = document.createElement(
-          'tr',
-        );
+        const descriptionRow: HTMLTableRowElement =
+          document.createElement('tr');
         descriptionRow.appendChild(descriptionCell);
         descriptionRow.className = itemRowClassName;
         if (typeof onRowClick === 'function') {
@@ -138,6 +136,9 @@ export default function useAwsuiTableItemDescription<Item>({
           });
         }
 
+        // +1 to move to the next row, +1 for the row that we're about to
+        //   append.
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         rowIndex += 2;
         if (itemRowNextSibling === null) {
           tbody.appendChild(descriptionRow);

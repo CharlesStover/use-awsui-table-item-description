@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
+import type { UseAwsuiTableItemDescriptionProps } from '..';
 import TestTable from '../test-components/test-table';
-import TestTableProps from '../test-types/test-table-props';
+import type TestItem from '../test-types/test-item';
 import asyncEffect from '../test-utils/async-effect';
 
 interface State {
@@ -8,7 +9,11 @@ interface State {
 }
 
 export default async function renderTestTable(
-  props: TestTableProps,
+  props: Omit<
+    Partial<Omit<UseAwsuiTableItemDescriptionProps<TestItem>, 'items'>>,
+    'ref'
+  > &
+    Pick<UseAwsuiTableItemDescriptionProps<TestItem>, 'items'>,
 ): Promise<State> {
   const { container } = render(<TestTable {...props} />);
 

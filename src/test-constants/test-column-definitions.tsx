@@ -1,11 +1,11 @@
-import { TableProps } from '@awsui/components-react/table';
-import { ReactElement } from 'react';
-import TestItem from '../test-types/test-item';
+import type { TableProps } from '@awsui/components-react/table';
+import type { ReactElement } from 'react';
+import type TestItem from '../test-types/test-item';
 
 const TEST_COLUMN_DEFINITIONS: TableProps.ColumnDefinition<TestItem>[] = [
   {
     header: 'test header',
-    cell({ value }): ReactElement {
+    cell({ value }: TestItem): ReactElement {
       return <>{value}</>;
     },
   },

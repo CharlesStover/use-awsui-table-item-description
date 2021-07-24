@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react';
 
 const ASYNC_EFFECT_REF: MutableRefObject<Promise<unknown> | undefined> = {
   current: undefined,

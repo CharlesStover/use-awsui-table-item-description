@@ -1,4 +1,4 @@
 export default interface TestItem {
-  description?: string;
-  value: string;
+  readonly description?: string;
+  readonly value: string;
 }

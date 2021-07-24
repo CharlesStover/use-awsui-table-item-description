@@ -98,16 +98,9 @@ The hook uses this ref to navigate and mutate its child DOM nodes.
 
 ## Contributing
 
-- Use `yarn` to install the dependencies.
-- Use `yarn up * && yarn up @*/*` to upgrade the dependencies.
-- Use `yarn dlx @yarnpkg/pnpify --sdk vscode` to install Intellisense support
-  for Visual Studio Code.
+- Use `yarn set version latest` to install the latest version of Yarn.
+- Use `yarn up * @*/*` to install and upgrade the dependencies.
+- Use `yarn sdks vscode` to add Visual Studio Code support.
 - Use `yarn test` to unit test the project, including coverage and linting.
 - Use `yarn test-watch` to unit test the project in watch mode, without coverage
   or linting.
-
-## Sponsor 💗
-
-If you are a fan of this project, you may
-[become a sponsor](https://github.com/sponsors/CharlesStover) via GitHub's
-Sponsors Program.

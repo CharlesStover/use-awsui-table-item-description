@@ -1,9 +1,11 @@
 import mapRowToCellBorderBottomWidth from '../map/map-row-to-cell-border-bottom-width';
 
+const FIRST = 0;
+
 export default function mapRowsToCellBorderBottomWidth(
-  rows: HTMLCollectionOf<HTMLTableRowElement>,
-): null | string {
-  const firstRow: HTMLTableRowElement | null = rows.item(0);
+  rows: Readonly<HTMLCollectionOf<HTMLTableRowElement>>,
+): string | null {
+  const firstRow: HTMLTableRowElement | null = rows.item(FIRST);
   if (firstRow === null) {
     return null;
   }

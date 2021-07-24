@@ -1,9 +1,11 @@
+import type { RenderHookOptions } from '@testing-library/react-hooks';
+import type { UseAwsuiTableItemDescriptionProps } from '..';
 import mapElementToProps from '../test-map/map-element-to-props';
-import TestRenderHookOptions from '../test-types/test-render-hook-options';
+import type TestItem from '../test-types/test-item';
 
 export default function mapElementToRenderHookOptions(
   element: HTMLElement | null,
-): TestRenderHookOptions {
+): RenderHookOptions<UseAwsuiTableItemDescriptionProps<TestItem>> {
   return {
     initialProps: mapElementToProps(element),
   };

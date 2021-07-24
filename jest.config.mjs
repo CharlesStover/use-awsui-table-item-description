@@ -6,6 +6,7 @@ export default {
   resetModules: true,
   restoreMocks: true,
   roots: ['<rootDir>/src'],
+  testEnvironment: 'jsdom',
   transformIgnorePatterns: ['node_modules/(?!@awsui/components-react)/'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',

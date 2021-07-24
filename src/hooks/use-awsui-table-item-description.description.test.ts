@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { act } from 'react-dom/test-utils';
 import mapContainerToDescriptionCell from '../test-map/map-container-to-description-cell';
 import mapContainerToDescriptionRow from '../test-map/map-container-to-description-row';
 import mapContainerToItemCell from '../test-map/map-container-to-item-cell';
-import TestItem from '../test-types/test-item';
+import type TestItem from '../test-types/test-item';
 import renderTestTable from '../test-utils/render-test-table';
 
 const TEST_ITEM: TestItem = {
@@ -84,9 +85,8 @@ describe('useAwsuiTableItemDescription', (): void => {
         rowIndex: number,
       ): jest.JestMatchers<string> => {
         const tr: HTMLTableRowElement = trs[rowIndex];
-        const cells: HTMLCollectionOf<HTMLTableCellElement> = tr.getElementsByTagName(
-          'td',
-        );
+        const cells: HTMLCollectionOf<HTMLTableCellElement> =
+          tr.getElementsByTagName('td');
         const cell: HTMLTableCellElement = Array.from(cells)[0];
         return expect(cell.firstChild?.nodeValue);
       };
