@@ -69,7 +69,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: dist
+          path: |
+            dist
+            types
 
   npm:
     needs: [eslint, jest, rollup]
@@ -87,7 +89,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
-          path: dist
+          path: .
       - name: Publish
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
