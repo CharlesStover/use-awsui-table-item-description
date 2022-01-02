@@ -31,11 +31,11 @@
     "module": "./dist/esm/index.js"
   },
   "scripts": {
-    "build": "rollup --config",
     "eslint": "eslint src",
     "jest": "jest",
     "jest:watch": "jest --coverage=false --watch",
-    "start": "rollup --config --watch"
+    "rollup": "rollup --config",
+    "rollup:watch": "rollup --config --watch"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.384",
