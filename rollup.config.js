@@ -17,6 +17,8 @@ const EXTERNAL = new Set([
 export default [
   {
     cache: true,
+    input: 'src/index.ts',
+    treeshake: !IS_DEV,
     external(id) {
       if (EXTERNAL.has(id)) {
         return true;
@@ -30,7 +32,6 @@ export default [
 
       return false;
     },
-    input: 'src/index.ts',
     output: [
       {
         dir: MAIN_DIR,
@@ -58,7 +59,6 @@ export default [
         useTsconfigDeclarationDir: true,
       }),
     ],
-    treeshake: !IS_DEV,
     watch: {
       exclude: 'node_modules/**',
     },

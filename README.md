@@ -55,11 +55,13 @@ function MyTable() {
 
 ### `Component`
 
-Type: `ComponentType<Item>` _required_
+Type: `ComponentType<Item> | undefined` _optional_
 
 The `Component` property specifies the React component that you want to mount
 inside the description cell. Like the `cell` property of column definitions, it
 will receive the item instance spread as its props.
+
+If no component is provided, the descripition row will not be mounted.
 
 ### `colSpan`
 

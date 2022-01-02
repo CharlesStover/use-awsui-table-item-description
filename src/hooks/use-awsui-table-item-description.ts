@@ -1,4 +1,4 @@
-import type { NonCancelableCustomEvent } from '@awsui/components-react/internal/events';
+import type { NonCancelableCustomEvent } from '@awsui/components-react/interfaces';
 import type { TableProps } from '@awsui/components-react/table';
 import type { ComponentType, MutableRefObject } from 'react';
 import { useLayoutEffect, useRef } from 'react';
@@ -10,7 +10,7 @@ import promisifiedRender from '../utils/promisified-render';
 
 export interface UseAwsuiTableItemDescriptionProps<Item> {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  readonly Component: ComponentType<Item>;
+  readonly Component?: ComponentType<Item> | undefined;
   readonly colSpan: number;
   readonly items: readonly Item[];
   readonly ref: Readonly<MutableRefObject<HTMLElement | null>>;
@@ -42,6 +42,10 @@ export default function useAwsuiTableItemDescription<Item>({
   }, []);
 
   useLayoutEffect((): VoidFunction | undefined => {
+    if (typeof Component === 'undefined') {
+      return;
+    }
+
     const tbody: HTMLTableSectionElement | null = mapRefToTbody(ref);
     if (tbody === null) {
       return;

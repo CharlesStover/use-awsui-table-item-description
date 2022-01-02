@@ -4,6 +4,17 @@ import mapElementToProps from '../test-map/map-element-to-props';
 import mapElementToRenderHookOptions from '../test-map/map-element-to-render-hook-options';
 
 describe('useAwsuiTableItemDescription', (): void => {
+  it('should not throw when there is no component', async (): Promise<void> => {
+    const { result } = renderHook(useAwsuiTableItemDescription, {
+      initialProps: {
+        ...mapElementToProps(null),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: undefined,
+      },
+    });
+    await result.current.current;
+  });
+
   it('should not throw when the table has not mounted yet', async (): Promise<void> => {
     const { result } = renderHook(
       useAwsuiTableItemDescription,
