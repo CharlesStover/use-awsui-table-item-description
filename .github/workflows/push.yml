@@ -1,4 +1,4 @@
-name: Coverage push
+name: Push
 
 jobs:
   install:
@@ -98,7 +98,3 @@ jobs:
 on:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/coverage-push.yml'
-      - 'packages/coverage/**/*'
-      - 'packages/merge-coverage/**/*'
