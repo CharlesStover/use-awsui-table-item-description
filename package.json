@@ -34,9 +34,8 @@
     "build": "rollup --config",
     "eslint": "eslint src",
     "jest": "jest",
-    "start": "rollup --config --watch",
-    "test": "eslint src && jest",
-    "test-watch": "jest --coverage=false --watch"
+    "jest:watch": "jest --coverage=false --watch",
+    "start": "rollup --config --watch"
   },
   "devDependencies": {
     "@awsui/components-react": "^3.0.384",

@@ -1,7 +1,18 @@
 {
-  "exclude": ["/.yarn/", "/dist/", "/jest/", "/node_modules/", "/types/"],
   "extends": "./tsconfig.json",
+  "exclude": [
+    "/.yarn/",
+    "/dist/",
+    "/jest/",
+    "/node_modules/",
+    "/types/",
+    "/.pnp.cjs",
+    "/.pnp.loader.mjs"
+  ],
   "include": [
+    "/.eslintrc.json",
+    "/.prettierrc.json",
+    "/.yarnrc.yml",
     "**/*.cjs",
     "**/*.d.ts",
     "**/*.js",
