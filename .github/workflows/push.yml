@@ -97,4 +97,4 @@ jobs:
 
 on:
   push:
-    branches: [main]
+    branches: [master]
