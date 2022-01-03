@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { act } from 'react-dom/test-utils';
 import type TestItem from '../test/types/test-item';
+import TestAwsuiTableItemDescription from '../test/components/test-awsui-table-item-description';
 import mapContainerToDescriptionCell from '../test/utils/map-container-to-description-cell';
 import mapContainerToDescriptionRow from '../test/utils/map-container-to-description-row';
 import mapContainerToItemCell from '../test/utils/map-container-to-item-cell';
@@ -17,6 +18,8 @@ describe('useAwsuiTableItemDescription', (): void => {
   describe('item cell', (): void => {
     it('should set border-bottom-width to 0', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 
@@ -31,6 +34,8 @@ describe('useAwsuiTableItemDescription', (): void => {
   describe('description row', (): void => {
     it('should set class name', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 
@@ -40,6 +45,8 @@ describe('useAwsuiTableItemDescription', (): void => {
     it('should support a click handler', (): void => {
       const TEST_CLICK_HANDLER = jest.fn();
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
         onRowClick: TEST_CLICK_HANDLER,
       });
@@ -59,8 +66,46 @@ describe('useAwsuiTableItemDescription', (): void => {
       );
     });
 
+    it('should not render children when there is no component', (): void => {
+      const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: undefined,
+        items: [
+          { description: 'description 1', value: 'one' },
+          { description: 'description 2', value: 'two' },
+        ],
+      });
+
+      const tbody: HTMLTableSectionElement | null = container
+        .getElementsByTagName('tbody')
+        .item(0);
+      if (tbody === null) {
+        throw new Error('Could not find tbody.');
+      }
+
+      const trs: HTMLTableRowElement[] = Array.from(
+        tbody.getElementsByTagName('tr'),
+      );
+      expect(trs).toHaveLength(2);
+
+      const expectCellNodeValue = (
+        rowIndex: number,
+      ): jest.JestMatchers<string> => {
+        const tr: HTMLTableRowElement = trs[rowIndex];
+        const cells: HTMLCollectionOf<HTMLTableCellElement> =
+          tr.getElementsByTagName('td');
+        const cell: HTMLTableCellElement = Array.from(cells)[0];
+        return expect(cell.firstChild?.nodeValue);
+      };
+
+      expectCellNodeValue(0).toBe('one');
+      expectCellNodeValue(1).toBe('two');
+    });
+
     it('should be appended after its respective item', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: [
           { value: 'one' },
           { description: 'description 1', value: 'two' },
@@ -105,6 +150,8 @@ describe('useAwsuiTableItemDescription', (): void => {
   describe('description cell', (): void => {
     it('should set class name', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 
@@ -113,6 +160,8 @@ describe('useAwsuiTableItemDescription', (): void => {
 
     it('should set column span', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 
@@ -121,6 +170,8 @@ describe('useAwsuiTableItemDescription', (): void => {
 
     it('should set border-top-width to 0', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 
@@ -133,6 +184,8 @@ describe('useAwsuiTableItemDescription', (): void => {
 
     it('should set padding-top to 0', (): void => {
       const { container } = renderTestTable({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Component: TestAwsuiTableItemDescription,
         items: TEST_ITEMS,
       });
 

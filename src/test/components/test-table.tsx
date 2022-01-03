@@ -3,16 +3,12 @@ import type { ComponentType, MutableRefObject, ReactElement } from 'react';
 import { useRef } from 'react';
 import type { UseAwsuiTableItemDescriptionProps } from '../..';
 import useAwsuiTableItemDescription from '../..';
-import TestAwsuiTableItemDescription from '../components/test-awsui-table-item-description';
 import TEST_COLUMN_DEFINITIONS from '../constants/test-column-definitions';
 import type TestItem from '../types/test-item';
 
-const DEFUALT_COL_SPAN = 1;
-
 export default function TestTable({
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  Component = TestAwsuiTableItemDescription,
-  colSpan = DEFUALT_COL_SPAN,
+  Component,
   items,
   onRowClick,
 }: Omit<
@@ -27,7 +23,7 @@ export default function TestTable({
     useAwsuiTableItemDescription({
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Component,
-      colSpan,
+      colSpan: 1,
       items,
       onRowClick,
       ref,

@@ -12,6 +12,10 @@ export default function mapContainerToDescriptionRow(
   const tr: HTMLTableRowElement | null = tbody
     .getElementsByTagName('tr')
     .item(SECOND);
+
+  // This should never occur, so we don't need mandatory coverage on it.
+  // Since it throws an error, the test will fail and block CI/CD.
+  // istanbul ignore next
   if (tr === null) {
     throw DESCRIPTION_ROW_ERROR;
   }

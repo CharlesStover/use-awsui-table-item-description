@@ -13,6 +13,10 @@ a React component mounted with the `useAwsuiTableItemDescription` hook.
 
 ![screenshot](https://user-images.githubusercontent.com/343837/111864587-1d177480-891f-11eb-90a4-fb59209cb732.png)
 
+**The below documentation is for the `2.0.0-alpha.1` release.** If you are using
+`^1.0.0`, read
+[its documentation on GitHub](https://github.com/CharlesStover/use-awsui-table-item-description/blob/31fd83573a4de6d1da4937c91df1535b68126139/README.md#readme).
+
 ## Install
 
 - `npm install use-awsui-table-item-description` or
@@ -37,7 +41,7 @@ function TableItemDescription(item) {
 
 function MyTable() {
   const ref = useRef(null);
-  useAwsuiTableItemDescription({
+  const DescriptionPortal = useAwsuiTableItemDescription({
     Component: TableItemDescription,
     colSpan: 4,
     items: ITEMS,
@@ -47,6 +51,7 @@ function MyTable() {
   return (
     <div ref={ref}>
       <Table columnDefinitions={COLUMN_DEFINITIONS} items={[ITEM]} />
+      <DescriptionPortal />
     </div>
   );
 ```
