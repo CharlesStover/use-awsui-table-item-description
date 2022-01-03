@@ -1,5 +1,5 @@
-import DESCRIPTION_ROW_ERROR from '../test-constants/description-row-error';
-import mapContainerToTbody from '../test-map/map-container-to-tbody';
+import DESCRIPTION_ROW_ERROR from '../constants/description-row-error';
+import mapContainerToTbody from '../utils/map-container-to-tbody';
 
 const SECOND = 1;
 

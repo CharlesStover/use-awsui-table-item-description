@@ -1,6 +1,6 @@
 import type { TableProps } from '@awsui/components-react/table';
 import type { ReactElement } from 'react';
-import type TestItem from '../test-types/test-item';
+import type TestItem from '../types/test-item';
 
 const TEST_COLUMN_DEFINITIONS: TableProps.ColumnDefinition<TestItem>[] = [
   {

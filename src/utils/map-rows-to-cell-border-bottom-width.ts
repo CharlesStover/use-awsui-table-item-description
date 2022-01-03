@@ -1,4 +1,4 @@
-import mapRowToCellBorderBottomWidth from '../map/map-row-to-cell-border-bottom-width';
+import mapRowToCellBorderBottomWidth from '../utils/map-row-to-cell-border-bottom-width';
 
 const FIRST = 0;
 

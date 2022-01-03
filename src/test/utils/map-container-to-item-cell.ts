@@ -1,7 +1,6 @@
-import DESCRIPTION_CELL_ERROR from '../test-constants/description-cell-error';
-import mapContainerToTbody from '../test-map/map-container-to-tbody';
+import mapContainerToTbody from '../utils/map-container-to-tbody';
 
-const SECOND = 1;
+const FIRST = 0;
 
 export default function mapContainerToDescriptionCell(
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
@@ -11,9 +10,9 @@ export default function mapContainerToDescriptionCell(
 
   const td: HTMLTableCellElement | null = tbody
     .getElementsByTagName('td')
-    .item(SECOND);
+    .item(FIRST);
   if (td === null) {
-    throw DESCRIPTION_CELL_ERROR;
+    throw new Error('Could not find item cell.');
   }
 
   return td;

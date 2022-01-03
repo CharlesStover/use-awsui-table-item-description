@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { act } from 'react-dom/test-utils';
-import mapContainerToDescriptionCell from '../test-map/map-container-to-description-cell';
-import mapContainerToDescriptionRow from '../test-map/map-container-to-description-row';
-import mapContainerToItemCell from '../test-map/map-container-to-item-cell';
-import type TestItem from '../test-types/test-item';
-import renderTestTable from '../test-utils/render-test-table';
+import type TestItem from '../test/types/test-item';
+import mapContainerToDescriptionCell from '../test/utils/map-container-to-description-cell';
+import mapContainerToDescriptionRow from '../test/utils/map-container-to-description-row';
+import mapContainerToItemCell from '../test/utils/map-container-to-item-cell';
+import renderTestTable from '../test/utils/render-test-table';
 
 const TEST_ITEM: TestItem = {
   description: 'test description',
@@ -15,8 +15,8 @@ const TEST_ITEMS: TestItem[] = [TEST_ITEM];
 
 describe('useAwsuiTableItemDescription', (): void => {
   describe('item cell', (): void => {
-    it('should set border-bottom-width to 0', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set border-bottom-width to 0', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
@@ -29,17 +29,17 @@ describe('useAwsuiTableItemDescription', (): void => {
   });
 
   describe('description row', (): void => {
-    it('should set class name', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set class name', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
       expect(mapContainerToDescriptionRow(container).className).not.toBe('');
     });
 
-    it('should support a click handler', async (): Promise<void> => {
+    it('should support a click handler', (): void => {
       const TEST_CLICK_HANDLER = jest.fn();
-      const { container } = await renderTestTable({
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
         onRowClick: TEST_CLICK_HANDLER,
       });
@@ -59,8 +59,8 @@ describe('useAwsuiTableItemDescription', (): void => {
       );
     });
 
-    it('should be appended after its respective item', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should be appended after its respective item', (): void => {
+      const { container } = renderTestTable({
         items: [
           { value: 'one' },
           { description: 'description 1', value: 'two' },
@@ -79,7 +79,7 @@ describe('useAwsuiTableItemDescription', (): void => {
       const trs: HTMLTableRowElement[] = Array.from(
         tbody.getElementsByTagName('tr'),
       );
-      expect(trs).toHaveLength(6);
+      expect(trs).toHaveLength(8);
 
       const expectCellNodeValue = (
         rowIndex: number,
@@ -92,33 +92,35 @@ describe('useAwsuiTableItemDescription', (): void => {
       };
 
       expectCellNodeValue(0).toBe('one');
-      expectCellNodeValue(1).toBe('two');
-      expectCellNodeValue(2).toBe('description 1');
-      expectCellNodeValue(3).toBe('three');
-      expectCellNodeValue(4).toBe('four');
-      expectCellNodeValue(5).toBe('description 2');
+      expectCellNodeValue(1).toBeUndefined();
+      expectCellNodeValue(2).toBe('two');
+      expectCellNodeValue(3).toBe('description 1');
+      expectCellNodeValue(4).toBe('three');
+      expectCellNodeValue(5).toBeUndefined();
+      expectCellNodeValue(6).toBe('four');
+      expectCellNodeValue(7).toBe('description 2');
     });
   });
 
   describe('description cell', (): void => {
-    it('should set class name', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set class name', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
       expect(mapContainerToDescriptionCell(container).className).not.toBe('');
     });
 
-    it('should set column span', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set column span', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
       expect(mapContainerToDescriptionCell(container).colSpan).toBe(1);
     });
 
-    it('should set border-top-width to 0', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set border-top-width to 0', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
@@ -129,8 +131,8 @@ describe('useAwsuiTableItemDescription', (): void => {
       ).toBe('0');
     });
 
-    it('should set padding-top to 0', async (): Promise<void> => {
-      const { container } = await renderTestTable({
+    it('should set padding-top to 0', (): void => {
+      const { container } = renderTestTable({
         items: TEST_ITEMS,
       });
 
