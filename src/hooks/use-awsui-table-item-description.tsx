@@ -67,11 +67,17 @@ export default function useAwsuiTableItemDescription<Item>({
     const descriptionRows: HTMLTableRowElement[] = [];
     const itemCells: HTMLTableCellElement[] = [];
 
-    for (
-      let itemIndex = 0, itemRow: HTMLTableRowElement | null, rowIndex = 0;
-      (itemRow = rows.item(rowIndex));
-      itemIndex++
-    ) {
+    const itemsCount: number = items.length;
+    let rowIndexOffset = 0;
+    for (let itemIndex = 0; itemIndex < itemsCount; itemIndex++) {
+      const rowIndex: number = itemIndex + rowIndexOffset;
+      const itemRow: HTMLTableRowElement | null = rows.item(rowIndex);
+      if (itemRow === null) {
+        throw new Error(
+          `Expected a table row at index ${rowIndex} for item index ${itemIndex}.`,
+        );
+      }
+
       const cellClassName: string | null = mapRowToCellClassName(itemRow);
 
       // We ignore this line, because it should never happen, and it's
@@ -82,9 +88,20 @@ export default function useAwsuiTableItemDescription<Item>({
         continue;
       }
 
-      const descriptionCell: HTMLTableCellElement = descriptionCells[itemIndex];
+      const descriptionCell: HTMLTableCellElement | undefined =
+        descriptionCells[itemIndex];
+      if (typeof descriptionCell === 'undefined') {
+        throw new Error(
+          `Expected to find a description cell for item index ${itemIndex}.`,
+        );
+      }
+
       const descriptionRow: HTMLTableRowElement = document.createElement('tr');
-      const item: Item = items[itemIndex];
+      const item: Item | undefined = items[itemIndex];
+      if (typeof item === 'undefined') {
+        throw new Error(`Expected to find an item for index ${itemIndex}.`);
+      }
+
       const itemRowClassName: string = itemRow.className;
       const itemRowNextSibling: ChildNode | null = itemRow.nextSibling;
       const itemRowCells: HTMLTableCellElement[] = Array.from(
@@ -110,10 +127,8 @@ export default function useAwsuiTableItemDescription<Item>({
         });
       }
 
-      // +1 to move to the next row, +1 for the row that we're about to
-      //   append.
-      // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-      rowIndex += 2;
+      // +1 for the row that we're about to append.
+      rowIndexOffset++;
       if (itemRowNextSibling === null) {
         tbody.appendChild(descriptionRow);
       } else {
@@ -148,8 +163,13 @@ export default function useAwsuiTableItemDescription<Item>({
       return (
         <>
           {items.map((item: Item, index: number): ReactElement => {
-            const descriptionCell: HTMLTableCellElement =
+            const descriptionCell: HTMLTableCellElement | undefined =
               descriptionCells[index];
+            if (typeof descriptionCell === 'undefined') {
+              throw new Error(
+                `Expected to find a description cell for item index ${index}.`,
+              );
+            }
             return createPortal(<Component {...item} />, descriptionCell);
           })}
         </>
