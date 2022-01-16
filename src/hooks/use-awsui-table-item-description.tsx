@@ -72,6 +72,11 @@ export default function useAwsuiTableItemDescription<Item>({
     for (let itemIndex = 0; itemIndex < itemsCount; itemIndex++) {
       const rowIndex: number = itemIndex + rowIndexOffset;
       const itemRow: HTMLTableRowElement | null = rows.item(rowIndex);
+
+      // We ignore this line, because it should never happen. and it's
+      //   impossible to reproduce with Jest. This is a fail safe in case AWS UI
+      //   ever changes their implementation details.
+      // istanbul ignore next
       if (itemRow === null) {
         throw new Error(
           `Expected a table row at index ${rowIndex} for item index ${itemIndex}.`,
@@ -90,6 +95,11 @@ export default function useAwsuiTableItemDescription<Item>({
 
       const descriptionCell: HTMLTableCellElement | undefined =
         descriptionCells[itemIndex];
+
+      // We ignore this line, because it should never happen, and it's
+      //   impossible to reproduce with Jest. This is a fail safe in case AWS UI
+      //   ever changes their implementation details.
+      // istanbul ignore next
       if (typeof descriptionCell === 'undefined') {
         throw new Error(
           `Expected to find a description cell for item index ${itemIndex}.`,
@@ -98,6 +108,11 @@ export default function useAwsuiTableItemDescription<Item>({
 
       const descriptionRow: HTMLTableRowElement = document.createElement('tr');
       const item: Item | undefined = items[itemIndex];
+
+      // We ignore this line, because it should never happen, and it's
+      //   impossible to reproduce with Jest. This is a fail safe in case AWS UI
+      //   ever changes their implementation details.
+      // istanbul ignore next
       if (typeof item === 'undefined') {
         throw new Error(`Expected to find an item for index ${itemIndex}.`);
       }
@@ -165,6 +180,11 @@ export default function useAwsuiTableItemDescription<Item>({
           {items.map((item: Item, index: number): ReactElement => {
             const descriptionCell: HTMLTableCellElement | undefined =
               descriptionCells[index];
+
+            // We ignore this line, because it should never happen, and it's
+            //   impossible to reproduce with Jest. This is a fail safe in case
+            //   AWS UI ever changes their implementation details.
+            // istanbul ignore next
             if (typeof descriptionCell === 'undefined') {
               throw new Error(
                 `Expected to find a description cell for item index ${index}.`,
