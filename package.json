@@ -1,6 +1,6 @@
 {
   "name": "use-awsui-table-item-description",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Charles Stover <use-awsui-table-item-description@charlesstover.com>",
   "description": "Adds a description row to each AWS UI table item",
   "homepage": "https://www.npmjs.com/package/use-awsui-table-item-description",
@@ -72,7 +72,7 @@
   },
   "peerDependencies": {
     "@awsui/components-react": "^3.0.0",
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   }
 }
